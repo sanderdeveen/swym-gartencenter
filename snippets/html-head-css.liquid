@@ -1,0 +1,177 @@
+{%- liquid
+
+  assign font_regular = settings.font_regular | font_modify: 'weight', '400'
+  assign font_medium = settings.font_medium | font_modify: 'weight', '500'
+  assign font_bold = settings.font_bold | font_modify: 'weight', '700'
+
+  assign color_background = '#FFFFFF'
+  assign color_text = '#262626'
+  assign color_black = '#262626'
+  assign color_white = '#ffffff'
+
+  assign color_primary = '#DF9A3E'
+  assign color_text_on_primary = '#FFFFFF'
+
+  assign color_secondary = '#262626'
+  assign color_text_on_secondary = '#FFFFFF'
+
+  assign color_funnel = '#FF7B51'
+  assign color_text_on_funnel = '#FFFFFF'
+
+  assign color_border = '#DEDEDE'
+
+  assign color_positive = '#42CC92'
+  assign color_negative = '#FF5656'
+
+-%}
+
+{%- unless settings.font_regular.system? -%}
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+{%- endunless -%}
+
+{% style %}
+
+  {%- comment -%} Add font faces here {%- endcomment -%}
+  {%- unless settings.font_regular.system? -%}
+    {{ font_regular | font_face: font_display: 'swap' }}
+    {{ font_regular | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+    {{ font_medium | font_face: font_display: 'swap' }}
+    {{ font_bold | font_face: font_display: 'swap' }}
+  {% endunless %}
+
+  {%- comment -%} Variables {%- endcomment -%}
+  :root {
+    {% comment %} Site dimensions {% endcomment %}
+    --site-center: 1440px;
+    --site-center-compact: 880px;
+    --site-center-narrow: 656px;
+
+    --site-side-spacing: 1rem;
+    --site-side-spacing-md: 4vw;
+
+    --element-spacing: 1rem;
+
+    --container-spacing: 2rem;
+    --container-spacing-md: 3.5rem;
+
+    --container-row-spacing: 1rem;
+    --container-row-spacing-md: 2rem;
+
+    {% comment %} Grid gaps {% endcomment %}
+    --spacing: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+
+    --row-gap: 1rem;
+    --row-gap-md: 2rem;
+    --row-gap-lg: 3rem;
+
+    --col-gap: 1rem;
+    --col-gap-lg: 2rem;
+    --col-gap-xxl: 3rem;
+
+    {% comment %} Fonts {% endcomment %}
+    --font-regular-family: {{ settings.font_regular.family }}, {{ settings.font_regular.fallback_families }};
+    --font-regular-style: {{ settings.font_regular.style }};
+    --font-regular-weight: {{ settings.font_regular.weight }};
+
+    --font-medium-family: {{ settings.font_medium.family }}, {{ settings.font_medium.fallback_families }};
+    --font-medium-style: {{ settings.font_medium.style }};
+    --font-medium-weight: {{ settings.font_medium.weight }};
+
+    --font-bold-family: {{ settings.font_bold.family }}, {{ settings.font_bold.fallback_families }};
+    --font-bold-style: {{ settings.font_bold.style }};
+    --font-bold-weight: {{ settings.font_bold.weight }};
+
+    {% comment %} Brand colors {% endcomment %}
+    --color-brand-background: {{ color_background }};
+    --color-brand-text: {{ color_text }};
+    --color-brand-text-50: {{ color_text | color_mix: '#ffffff', 51.5 }};
+    --color-brand-text-25: {{ color_text | color_mix: '#ffffff', 25 }};
+    --color-brand-text-15: {{ color_text | color_mix: '#ffffff', 15 }};
+    --color-brand-text-5: {{ color_text | color_mix: '#ffffff', 5 }};
+
+    --color-brand-link: var(--color-brand-primary);
+    --color-brand-link-hover: var(--color-brand-primary-dark);
+
+    --color-brand-primary: {{ color_primary }};
+    --color-brand-text-on-primary: {{ color_text_on_primary }};
+    --color-brand-primary-dark: {{ color_primary | color_darken: 10 }};
+    --color-brand-primary-50: {{ color_primary | color_mix: '#ffffff', 50 }};
+    --color-brand-primary-25: {{ color_primary | color_mix: '#ffffff', 25 }};
+    --color-brand-primary-15: {{ color_primary | color_mix: '#ffffff', 15 }};
+    --color-brand-primary-5: {{ color_primary | color_mix: '#ffffff', 5 }};
+
+    --color-brand-secondary: {{ color_secondary }};
+    --color-brand-text-on-secondary: {{ color_text_on_secondary }};
+    --color-brand-secondary-dark: {{ color_secondary | color_darken: 10 }};
+    --color-brand-secondary-50: {{ color_secondary | color_mix: '#ffffff', 50 }};
+    --color-brand-secondary-25: {{ color_secondary | color_mix: '#ffffff', 25 }};
+    --color-brand-secondary-15: {{ color_secondary | color_mix: '#ffffff', 15 }};
+    --color-brand-secondary-5: {{ color_secondary | color_mix: '#ffffff', 5 }};
+
+    --color-brand-funnel: {{ color_funnel }};
+    --color-brand-text-on-funnel: {{ color_text_on_funnel }};
+    --color-brand-funnel-dark: {{ color_funnel | color_darken: 10 }};
+    --color-brand-funnel-50: {{ color_funnel | color_mix: '#ffffff', 50 }};
+    --color-brand-funnel-25: {{ color_funnel | color_mix: '#ffffff', 25 }};
+    --color-brand-funnel-15: {{ color_funnel | color_mix: '#ffffff', 15 }};
+    --color-brand-funnel-5: {{ color_funnel | color_mix: '#ffffff', 5 }};
+
+    --color-black: {{ color_black }};
+    --color-black-50: {{ color_black | color_mix: '#ffffff', 51.5 }};
+    --color-black-25: {{ color_black | color_mix: '#ffffff', 25 }};
+    --color-black-15: {{ color_black | color_mix: '#ffffff', 15 }};
+    --color-black-5: {{ color_black | color_mix: '#ffffff', 5 }};
+    --color-white: {{ color_white }};
+
+    --color-brand-accent: var(--color-brand-primary-15);
+    --color-brand-text-on-accent: var(--color-brand-text);
+
+    --color-border: {{ color_border }};
+    --color-border-50: {{ color_border | color_mix: '#ffffff', 50 }};
+
+    --color-brand-positive: {{ color_positive }};
+    --color-brand-negative: {{ color_negative }};
+
+    {% comment %} Element variables {% endcomment %}
+    --border-radius: 0;
+    --button-background: var(--color-brand-primary);
+    --button-text: var(--color-brand-text-on-primary);
+    --button-hover-background: var(--color-brand-primary-dark);
+    --button-hover-text: var(--color-brand-text-on-primary);
+    --button-border: 1px;
+    --button-border-color: var(--color-brand-primary);
+    --button-hover-border-color: var(--color-brand-primary-dark);
+
+    {% comment %} Indexes {% endcomment %}
+    --z-index-dropdown: 1000;
+    --z-index-sticky: 1020;
+    --z-index-fixed: 1030;
+    --z-index-offcanvas-backdrop: 1040;
+    --z-index-offcanvas: 1045;
+    --z-index-modal-backdrop: 1050;
+    --z-index-modal: 1055;
+    --z-index-popover: 1070;
+    --z-index-tooltip: 1080;
+
+    {% comment %} Animation durations {% endcomment %}
+    --duration-short: 100ms;
+    --duration-default: 200ms;
+    --duration-long: 500ms;
+
+    --swiper-pagination-color: {{ color_primary }};
+
+ }
+{% endstyle %}
+
+{%- comment -%}
+  This file is generated with Gulp from each SCSS compile
+  This makes sure that all critical CSS is already inline for page speed purposes
+{%- capture critical_css -%}
+  {% render 'critical-css' %}
+{%- endcapture -%}
+{%- unless critical_css contains 'Liquid error' -%}
+  {{ critical_css }}
+{%- endunless -%}
+{%- endcomment -%}

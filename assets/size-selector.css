@@ -1,0 +1,28 @@
+
+.size-selector__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.size-selector__url {
+  display: flex;
+  margin: 0 0 1.2rem 0;
+  text-decoration: none;
+}
+
+.size-selector__url:hover { 
+  box-shadow: 1cm;
+}
+
+.size-selector__img {
+  margin-right: 10px;
+}
+
+.size-selector__title {
+  margin: 0;
+}
+
+.size-selector__price {
+  display: block;
+}

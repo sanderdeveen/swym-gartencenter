@@ -1,0 +1,323 @@
+{
+  "sections": {
+    "65e91970-5eae-43cf-92df-35c21b590f13": {
+      "type": "usp",
+      "disabled": true,
+      "blocks": {
+        "template--15819654398132__65e91970-5eae-43cf-92df-35c21b590f13-1665501165bc9077b0-0": {
+          "type": "mob_info",
+          "settings": {
+            "icon": "check_mark",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "4836d7ea-1a5a-45a4-adac-4faf358b9997": {
+          "type": "desk_usp",
+          "settings": {
+            "desk-usp": "Bezorging aan huis in NL en BE"
+          }
+        },
+        "a8282116-42b8-4ece-967e-2ef46554dcc7": {
+          "type": "desk_usp",
+          "settings": {
+            "desk-usp": "Bezorging aan huis in NL en BE"
+          }
+        }
+      },
+      "block_order": [
+        "template--15819654398132__65e91970-5eae-43cf-92df-35c21b590f13-1665501165bc9077b0-0",
+        "4836d7ea-1a5a-45a4-adac-4faf358b9997",
+        "a8282116-42b8-4ece-967e-2ef46554dcc7"
+      ],
+      "settings": {
+        "mobile-heading": "Pflanzen, Bäume & mehr mit schneller Lieferung"
+      }
+    },
+    "1663706352d2317f76": {
+      "type": "breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "show_home_link": true,
+        "show_tagged_link": true,
+        "show_non_link": true,
+        "hide_on_mobile": false,
+        "alignment": "left"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+          }
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "1c2a2057-74d9-40b8-80f1-d1ceeaeccc10": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/star_rating\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {
+            "stars_fill_color": "#f29f40",
+            "star_size": 15,
+            "text_align": "flex-start",
+            "product": "{{product}}",
+            "stars_text_empty": "No reviews"
+          }
+        },
+        "b4bfe856-7334-4403-ab98-2677808af3c2": {
+          "type": "product_usp",
+          "settings": {
+            "usp_fallback": ""
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_dynamic_checkout": false
+          }
+        },
+        "eb681cf4-8eab-434c-a436-0d02fa13b994": {
+          "type": "buy_container",
+          "settings": {
+          }
+        },
+        "fe8034ca-f981-4a15-a4d9-c0a7ead4f703": {
+          "type": "sub_header",
+          "settings": {
+            "sub-header": "Vor-und Nachteile"
+          }
+        },
+        "8163d347-5758-40b3-b933-d668309c7187": {
+          "type": "product_pro_con",
+          "settings": {
+            "product_pro_con": "<p>{{ product.metafields.custom.pro_and_cons | metafield_tag }}<\/p>"
+          }
+        },
+        "a7cee4f8-ef42-4944-9e31-f751182c53c9": {
+          "type": "sub_header",
+          "settings": {
+            "sub-header": "{{ product.metafields.custom.product_name.value }}"
+          }
+        },
+        "61daa870-84d0-47a1-b954-cc078cfb77e1": {
+          "type": "product_description",
+          "settings": {
+          }
+        },
+        "09e064fd-03cc-4622-bce2-24604ca9948b": {
+          "type": "sub_header",
+          "settings": {
+            "sub-header": "Spezifikationen"
+          }
+        },
+        "107f5977-5d44-4074-90fb-7a6e8f5f6f45": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Passend für",
+            "specification_content": ""
+          }
+        },
+        "08cfccc7-b373-490a-a396-250cabe2dca9": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Höhe",
+            "specification_content": ""
+          }
+        },
+        "16209b71-bf47-438d-9f52-e91f2dcff4db": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Blattfarbe",
+            "specification_content": ""
+          }
+        },
+        "d79b1655-0e8a-416f-a5da-5890ac0d9876": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Blattwinter",
+            "specification_content": ""
+          }
+        },
+        "b9d06936-7e0f-4538-af0a-ac0f6073aef8": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Winterhart",
+            "specification_content": ""
+          }
+        },
+        "62346ea2-49b9-4aef-905f-28a8223184e2": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Wartung",
+            "specification_content": ""
+          }
+        },
+        "9f1c3c45-080c-4ab1-947a-5070ad07da6a": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Tonhöhe",
+            "specification_content": ""
+          }
+        },
+        "2cfc179d-4ab6-4d04-9e04-7b3522d3e8d6": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Blumen",
+            "specification_content": ""
+          }
+        },
+        "7d0bccc8-56c3-49b2-ab78-244c40f0f722": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Beschneidungsmonat",
+            "specification_content": ""
+          }
+        },
+        "859ccbc8-b4a3-43aa-b7db-a47d3ee586e8": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Wasserbedarf",
+            "specification_content": ""
+          }
+        },
+        "0d68d2ae-ddbf-4354-9831-bff3767b7bba": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Fruchttragend",
+            "specification_content": ""
+          }
+        },
+        "79b5745e-dda5-4d89-9455-fc471780dc97": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Wachstumsrate",
+            "specification_content": ""
+          }
+        },
+        "0dce407b-c808-4f7e-8daa-f3a4a66e3fba": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Duftend",
+            "specification_content": ""
+          }
+        },
+        "13f9f388-9311-46d9-81f6-846b9f8dd2b2": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/reviews\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {
+          }
+        },
+        "c3ad691a-f11d-444c-86d6-e63a26580fea": {
+          "type": "product_specification",
+          "disabled": true,
+          "settings": {
+            "specification_name": "Stacheln",
+            "specification_content": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "caption",
+        "1c2a2057-74d9-40b8-80f1-d1ceeaeccc10",
+        "b4bfe856-7334-4403-ab98-2677808af3c2",
+        "variant_picker",
+        "price",
+        "quantity_selector",
+        "buy_buttons",
+        "eb681cf4-8eab-434c-a436-0d02fa13b994",
+        "fe8034ca-f981-4a15-a4d9-c0a7ead4f703",
+        "8163d347-5758-40b3-b933-d668309c7187",
+        "a7cee4f8-ef42-4944-9e31-f751182c53c9",
+        "61daa870-84d0-47a1-b954-cc078cfb77e1",
+        "09e064fd-03cc-4622-bce2-24604ca9948b",
+        "107f5977-5d44-4074-90fb-7a6e8f5f6f45",
+        "08cfccc7-b373-490a-a396-250cabe2dca9",
+        "16209b71-bf47-438d-9f52-e91f2dcff4db",
+        "d79b1655-0e8a-416f-a5da-5890ac0d9876",
+        "b9d06936-7e0f-4538-af0a-ac0f6073aef8",
+        "62346ea2-49b9-4aef-905f-28a8223184e2",
+        "9f1c3c45-080c-4ab1-947a-5070ad07da6a",
+        "2cfc179d-4ab6-4d04-9e04-7b3522d3e8d6",
+        "7d0bccc8-56c3-49b2-ab78-244c40f0f722",
+        "859ccbc8-b4a3-43aa-b7db-a47d3ee586e8",
+        "0d68d2ae-ddbf-4354-9831-bff3767b7bba",
+        "79b5745e-dda5-4d89-9455-fc471780dc97",
+        "0dce407b-c808-4f7e-8daa-f3a4a66e3fba",
+        "13f9f388-9311-46d9-81f6-846b9f8dd2b2",
+        "c3ad691a-f11d-444c-86d6-e63a26580fea"
+      ],
+      "settings": {
+        "enable_sticky_info": false,
+        "gallery_layout": "thumbnail",
+        "media_size": "medium",
+        "mobile_thumbnails": "show",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "65e91970-5eae-43cf-92df-35c21b590f13",
+    "1663706352d2317f76",
+    "main",
+    "product-recommendations"
+  ]
+}

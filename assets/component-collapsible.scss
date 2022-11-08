@@ -1,0 +1,74 @@
+// collapsible functionality
+.collapsible {
+  [data-collapsible-trigger] {
+    .js & {
+      cursor: pointer;
+      .collapsible-trigger-icon {
+        position: absolute;
+        top: rem(24);
+        left: rem(14);
+        transform: rotate(0deg);
+        margin-left: 0;
+        transition: transform 0.3s ease-out;
+        width: rem(24);
+      }
+    }
+  }
+  [data-collapsible-group] {
+    button {
+      position: relative;
+      @include font-weight('bold');
+      border: none;
+      background-color: var(--color-brand-secondary-10);
+      padding: rem(16) rem(20) rem(16) rem(44);
+      color: var(--color-brand-text);
+      font-size: rem(16);
+      line-height: rem(24);
+      text-align: left;
+      @include mqmin($bp-md) {
+        line-height: rem(26);
+        font-size: rem(18);
+      }
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--color-brand-secondary);
+      }
+    }
+    // If group is open show target
+    &.collapsible-is-open {
+    [data-collapsible-target] {
+        @include font-weight('regular');
+        background-color: var(--color-brand-secondary-10);
+        display: block;
+        padding: 0 rem(16) rem(20) rem(16);
+        line-height: rem(24);
+        @include mqmin($bp-md) {
+          line-height: rem(27);
+        }
+      }
+      // Rotate icon
+      .collapsible-trigger-icon {
+        transform: rotate(45deg);
+      }
+    }
+  }
+  // Hide anything inside the collapsible target only when javascript is active
+  [data-collapsible-target] {
+    .js & {
+      display: none;
+    }
+  }
+  &--rte {
+    margin-bottom: calc(var(--element-spacing) * 2);
+    [data-collapsible-group] {
+      margin-bottom: 1px;
+    }
+    [data-collapsible-trigger] {
+      justify-content: flex-start;
+    }
+    [data-collapsible-target] {
+      padding: 1rem;
+    }
+  }
+}

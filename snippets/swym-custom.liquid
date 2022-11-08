@@ -1,0 +1,33 @@
+<script defer>
+  function swymCallbackFn(swat){
+   // your API calls go here
+  setTimeout(checker, 2000);
+   function checker () {
+    var allBtns = document.querySelectorAll(".swym-collections");
+      console.log("checker is called");
+      for(var i=0;i<=allBtns.length;i++){
+        var n = allBtns[i].classList;
+         if(!n.contains("swym-added"))
+             allBtns[i].childNodes[3].childNodes[5].style['fill']= "none";
+          else if(n.contains("swym-added"))
+             allBtns[i].childNodes[3].childNodes[5].style['fill']= "#7bba59";
+      }
+    } 
+   
+     swat.evtLayer.addEventListener(swat.JSEvents.removedFromWishlist, function(){
+       setTimeout(checker, 1000);
+       console.log("stuff in event layer");
+     })
+     swat.evtLayer.addEventListener(swat.JSEvents.addedToWishlist, function(){
+       checker();
+       console.log("stuff in event layer add");
+     })
+                                    
+  
+ }
+  if(!window.SwymCallbacks){
+    window.SwymCallbacks = [];
+  }
+  window.SwymCallbacks.push(swymCallbackFn);
+
+</script>

@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "1663706416d5719c10": {
+      "type": "breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "show_home_link": true,
+        "show_tagged_link": true,
+        "show_non_link": true,
+        "hide_on_mobile": false,
+        "alignment": "left"
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "featured_product_one": "copy-of-copy-of-bamboo-rufa",
+        "featured_product_two": "nicht-invasiver-bambus-rufa",
+        "featured_product_three": "pokon-kamerplanten-voeding",
+        "color_scheme": "background-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "1663706416d5719c10",
+    "banner",
+    "product-grid"
+  ]
+}

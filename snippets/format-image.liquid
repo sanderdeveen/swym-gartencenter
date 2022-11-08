@@ -1,0 +1,286 @@
+{%- comment -%}
+
+  # Example/best result:
+  {%- render 'format-image',
+    image_obj: article.image,
+    image_alt: article.title,
+    image_size: "1000x500",
+    image_sizes_arr: "360x180|560x280|768x384|1024x512",
+    image_breakpoints_arr: "360|560|768|1024",
+    image_crop: "center",
+    image_class: "img--contain"
+  -%}
+
+  # Required parameters:
+    image_obj: image.object
+      The image to render
+    image_alt: ""
+      The alt text
+    image_size: "100x100"
+      The rendering size as "width x height": "100x" / "100x100" / "x100"
+      Both width and height are preferred, combined with image_crop: "center"
+      https://shopify.dev/docs/themes/liquid/reference/filters/url-filters#size-parameters
+
+  # Optional parameters:
+    image_breakpoints_arr: ""
+      Pipe-separated array with breakpoints: "360|425|768|1024|1440"
+      Requires image_sizes_arr to create sized sources with MAX-WIDTH
+    image_sizes_arr:
+      Pipe-separated array with rendering sizes per breakpoint: "360x360|425x425|768x768|1024x1024|1440x1440"
+    image_crop: ""
+      Set to 'center / top / left / right / bottom' to crop the image with the specified size.
+      Requires both height and width in image_size
+    image_class: ""
+      Set to 'img--contain' or 'img--cover' to make the image fit accordingly with object-fit styling
+    image_scale: "1, 2"
+      The pixel densities to render. 1 is ignored, 2 is default
+    image_type: ""
+      Can be set to "file" or "asset" for a file_img_url or an asset_img_url filter
+    image_data: ""
+      Data-attributes for js
+    image_lazy: true
+      Enable lazy loading
+    image_aria_label: ""
+      Add an aria label to the image
+    image_caption: ""
+      Add a figcaption
+    image_dimension_attributes: true
+      Add width and height attributes
+
+{%- endcomment -%}
+
+{%- comment %} Set image object and defaults for type, lazyloading and scales {% endcomment -%}
+{%- liquid
+  unless image_size != blank
+    assign image_size = '100x100'
+  endunless
+
+  unless image_type != blank
+    assign image_type = ''
+  endunless
+
+  if image_scale == blank
+    assign image_scale = '1,2'
+  endif
+
+  assign image_dimension_attributes_check = image_dimension_attributes | append: '_check'
+  assign image_dimensions = true
+  if image_dimension_attributes_check == "false_check"
+    assign image_dimensions = false
+  endif
+
+  assign image_scale = image_scale | remove: ' '
+  if image_scale contains "1,"
+    assign image_scale = image_scale | remove: '1,'
+  endif
+  assign image_scales_arr = image_scale | split: ','
+
+  if image_obj == blank or image_obj == 'notfound'
+    assign image_obj = 'no-image.gif'
+    assign image_type = 'asset'
+  endif
+-%}
+
+{%- comment %} Create arrays of breakpoints and image sizes {% endcomment -%}
+{%- liquid
+  assign theImage_breakpoints_arr = image_breakpoints_arr | split: '|'
+  assign theImage_sizes_arr = image_sizes_arr | split: '|'
+-%}
+
+{%- comment %} Calculate width and height {% endcomment -%}
+{%- liquid
+  assign image_height = ""
+  assign image_width = ""
+  assign image_attr_height = ""
+  assign image_attr_width = ""
+  assign size_parts = image_size | split: 'x'
+  assign image_width = size_parts[0] | plus: 0
+  assign image_height = size_parts[1] | plus: 0
+-%}
+
+{%- comment %} Create width and height attributes {% endcomment -%}
+{%- if image_dimensions and image_width > 0 -%}
+  {%- capture image_attr_width %}width="{{ image_width }}"{%- endcapture -%}
+{%- endif -%}
+{%- if image_dimensions and image_height > 0 -%}
+  {%- capture image_attr_height %}height="{{ image_height }}"{%- endcapture -%}
+{%- else -%}
+  {%- capture image_attr_height %}height="{{ image_width | divided_by: image_obj.aspect_ratio | round }}"{%- endcapture -%}
+{%- endif -%}
+
+{%- comment %} Set aspect ratio class if width and height are known {% endcomment -%}
+{%- liquid
+  unless image_aspect
+    if image_width > 0 or image_height > 0
+      if image_width == image_height
+        assign image_aspect = 'img--square'
+      elsif image_width > image_height
+        assign image_aspect = 'img--landscape'
+      elsif image_height > image_width
+        assign image_aspect = 'img--portrait'
+      endif
+    endif
+  endunless
+-%}
+
+{%- comment %} Capture title attribute = “image tooltip" {% endcomment -%}
+{%- capture image_attr_title -%}
+  {%- unless image_title == blank -%}
+    title="{{ image_title }}"
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- comment %} Capture alt attribute = "image description" {% endcomment -%}
+{%- liquid
+  assign image_attr_alt = 'alt=""'
+  unless image_alt == blank
+    capture image_attr_alt
+      echo 'alt="'
+      echo image_alt
+      echo '"'
+    endcapture
+  endunless
+-%}
+
+{%- comment -%} Render image sources from FILE {%- endcomment -%}
+{%- if image_type == 'file' -%}
+
+  {%- comment %} Capture extra sources from breakpoints {% endcomment -%}
+  {%- capture image_sources -%}
+    {%- if theImage_breakpoints_arr.size > 0 -%}
+      {%- comment %} Create source for each breakpoint {% endcomment -%}
+      {%- for theImage_breakpoint in theImage_breakpoints_arr -%}
+        {%- assign theImage_breakpoint_size = theImage_sizes_arr[forloop.index0] | strip -%}
+        <source media="(max-width: {{ theImage_breakpoint }}px)" srcset="{{ image_obj | file_img_url: theImage_breakpoint_size, crop: image_crop }}
+        {%- if image_scales_arr.size > 0 %} 1x,
+          {%- for scale in image_scales_arr -%}
+            {{ image_obj | file_img_url: theImage_breakpoint_size, scale: scale, crop: image_crop }} {{ scale }}x
+            {%- unless forloop.last -%}, {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+        ">
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- comment %} Capture image source {% endcomment -%}
+  {%- capture image_src -%}
+    src="{{ image_obj | file_img_url: image_size, crop: image_crop }}"
+    srcset="{{ image_obj | file_img_url: image_size, scale: 1, crop: image_crop -}}
+    {%- if image_scales_arr.size > 0 %} 1x,
+      {%- for scale in image_scales_arr -%}
+        {{- image_obj | file_img_url: image_size, scale: scale, crop: image_crop }} {{ scale }}x
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+    "
+  {%- endcapture -%}
+
+{%- comment -%}
+  Render image sources from ASSETS
+{%- endcomment -%}
+{%- elsif image_type == 'asset' -%}
+
+  {%- comment %} Capture extra sources from breakpoints {% endcomment -%}
+  {%- capture image_sources -%}
+    {%- if theImage_breakpoints_arr.size > 0 -%}
+      {%- comment %} Create source for each breakpoint {% endcomment -%}
+      {%- for theImage_breakpoint in theImage_breakpoints_arr -%}
+        {%- assign theImage_breakpoint_size = theImage_sizes_arr[forloop.index0] | strip -%}
+        <source media="(max-width: {{ theImage_breakpoint }}px)" srcset="{{ image_obj | asset_img_url: theImage_breakpoint_size, crop: image_crop }}
+        {%- if image_scales_arr.size > 0 %} 1x,
+          {%- for scale in image_scales_arr -%}
+            {{ image_obj | asset_img_url: theImage_breakpoint_size, scale: scale, crop: image_crop }} {{ scale }}x
+            {%- unless forloop.last -%}, {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+        ">
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- comment %} Capture image source {% endcomment -%}
+  {%- capture image_src -%}
+    src="{{ image_obj | asset_img_url: image_size, crop: image_crop }}"
+    srcset="{{ image_obj | asset_img_url: image_size, scale: 1, crop: image_crop -}}
+    {%- if image_scales_arr.size > 0 %} 1x,
+      {%- for scale in image_scales_arr -%}
+        {{- image_obj | asset_img_url: image_size, scale: scale, crop: image_crop }} {{ scale }}x
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+    "
+  {%- endcapture -%}
+
+{%- comment -%}
+  Render image sources from product-, variant-, line_item-, collection-, article- or image object
+{%- endcomment -%}
+{%- else -%}
+
+  {%- comment %} Capture extra sources from breakpoints {% endcomment -%}
+  {%- capture image_sources -%}
+    {%- if theImage_breakpoints_arr.size > 0 -%}
+      {%- comment %} Create source for each breakpoint {% endcomment -%}
+      {%- for theImage_breakpoint in theImage_breakpoints_arr -%}
+        {%- assign theImage_breakpoint_size = theImage_sizes_arr[forloop.index0] | strip -%}
+        <source media="(max-width: {{ theImage_breakpoint }}px)" srcset="{{ image_obj | img_url: theImage_breakpoint_size, crop: image_crop }}
+        {%- if image_scales_arr.size > 0 %} 1x,
+          {%- for scale in image_scales_arr -%}
+            {{ image_obj | img_url: theImage_breakpoint_size, scale: scale, crop: image_crop }} {{ scale }}x
+            {%- unless forloop.last -%}, {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+        ">
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- comment %} Capture image source {% endcomment -%}
+  {%- capture image_src -%}
+    src="{{ image_obj | img_url: image_size, crop: image_crop }}"
+    srcset="{{ image_obj | img_url: image_size, scale: 1, crop: image_crop -}}
+    {%- if image_scales_arr.size > 0 %} 1x,
+      {%- for scale in image_scales_arr -%}
+        {{- image_obj | img_url: image_size, scale: scale, crop: image_crop }} {{ scale }}x
+        {%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+    "
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- comment %} Capture all image attributes {% endcomment -%}
+{%- capture image_attributes -%}
+  {{ image_attr_alt }}
+  {{ image_attr_width }}
+  {{ image_attr_height }}
+  {{ image_src  }}
+  {{ image_attr_title }}
+  {{ image_aria_label }}
+  {{ image_data }}
+{%- endcapture -%}
+
+
+{%- comment -%} Render the image {%- endcomment -%}
+<figure class="img img--wrapper {{ image_class }} {{ image_aspect }}"
+  {%- if image_aspect == 'img--adapt' -%}
+    {%- liquid
+      assign featured_media_aspect_ratio = image_obj.aspect_ratio
+
+      if image_obj.aspect_ratio == nil
+        assign featured_media_aspect_ratio = 1
+      endif
+    -%}
+    style="padding-bottom: {{ 1 | divided_by: featured_media_aspect_ratio | times: 100 }}%;"
+  {% endif %}
+>
+  <picture>
+    {{ image_sources }}
+    <img loading="lazy" {{ image_attributes | strip_newlines | replace: '  ', ' ' }}>
+    {%- if image_caption != blank -%}
+      <figcaption>
+        {{- image_caption -}}
+      </figcaption>
+    {%- endif -%}
+  </picture>
+</figure>

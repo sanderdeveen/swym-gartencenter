@@ -1,0 +1,87 @@
+<div class="product_description-wrapper page-width">
+  {% for block in section.blocks %}
+    {%- case block.type -%}
+      {%- when 'sub_header' -%}
+        <h2 class="product__proscons-title">{{ block.settings.sub-header }}</h2>
+      {%- when 'product_description' -%}
+        {% if product.description != blank %}
+          <div class="product__description">
+            {{ product.description }}
+          </div>
+        {% endif %}
+      {%- when 'product_specification' -%}
+        {% if block.settings.specification_content != blank or block.settings.specification_name != blank  %}
+          <span class="product__specification rte"><strong>{{ block.settings.specification_name }}</strong>{{ block.settings.specification_content }}</span>
+        {% endif %}
+      {%- when 'product_pro_con' -%}  
+        {% liquid
+          assign pro_con = block.settings.product_pro_con | replace: 'Pro:', '<figure class="icon-pro">+</figure>' | replace: 'Con:', '<figure class="icon-con">-</figure>'
+        %}
+        <div class="product__procon">{{- pro_con -}}</div>
+    {%- endcase -%}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Product description", 
+  "tag": "section",
+  "class": "grid grid--1-col grid--2-col-tablet sandertje",
+  "settings": [
+  
+  ],
+  "blocks": [
+    {
+      "type": "sub_header",
+      "name": "Sub header",
+      "settings": [
+        {
+          "type": "text",
+          "id": "sub-header",
+          "default": "Sub header", 
+          "label": "Subh header"
+        }
+      ]
+    },
+    {
+      "type": "product_pro_con",
+      "name": "Product pro's or con",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "product_pro_con",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        }
+      ]
+    },
+    {
+      "type": "product_description",
+      "name": "Product description",
+      "settings": [
+      ]
+    },
+    {
+      "type": "product_specification",
+      "name": "Product specification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "specification_name",
+          "label": "Specification type",
+          "info": "Shows name in bold"
+        },  
+        {
+          "type": "richtext",
+          "id": "specification_content",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.content.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product description"
+    }
+  ]
+}
+{% endschema %}

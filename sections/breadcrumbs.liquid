@@ -1,0 +1,316 @@
+{% comment %}
+  Define on which templates breadcrumbs will be shown.
+  Can be: index,collection,list-collections,product,blog,article,page,cart,login,register,account,addresses,order,reset_password'
+{% endcomment %}
+{%- assign template_arr = 'collection,list-collections,product,blog,article,page,cart,login,register,account,addresses,order,reset_password' | split: ',' -%}
+{%- capture divider -%}
+  <span class='breadcrumbs__divider'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 347 347" class="fill-current lg:block h-3 w-3"><g fill-rule="nonzero"><path d="M259.4834 157.9551c-10.7047-10.6068-28.0604-10.6068-38.765 0L87.0284 290.4233c-10.7047 10.6069-10.7047 27.804 0 38.4108 10.7047 10.6069 28.0604 10.6069 38.765 0l133.69-132.4681c10.7046-10.6069 10.7046-27.804 0-38.4109z"></path> <path d="M87.0285 22.9551c-10.7047 10.6069-10.7047 27.804 0 38.4109L220.7183 193.834c10.7047 10.6069 28.0604 10.6069 38.7651 0 10.7047-10.6068 10.7047-27.804 0-38.4108L125.7936 22.9551c-10.7047-10.6068-28.0604-10.6068-38.765 0z"></path></g></svg></span>
+{%- endcapture -%}
+{%- if template_arr contains template.name -%}
+
+  {%- comment -%} hide on mobile {%- endcomment -%}
+  {%- liquid
+    assign hide_on_mobile_class = ''
+    if section.settings.hide_on_mobile == true
+      assign hide_on_mobile_class = ' visibility-hidden visibility-md--visible'
+    endif
+  -%}
+
+  {%- comment -%}
+    BREADCRUMB ARRAY
+    Creates an array from the main navigation and appends crumbs based on the current template.
+    Duplicate entries will be filtered out.
+    Use of items linking to "#" is not allowed by google, so these will not show up as a link in the breadcrumbs.
+  {%- endcomment -%}
+  {%- liquid
+    capture breadcrumb_str
+
+      comment
+        Prepend the homepage link
+      endcomment
+      assign home_text = 'templates.index.navigation_title' | t
+      if section.settings.show_home_link and home_text != blank
+        echo "||" | append: home_text | append: '::' | append: routes.root_url
+      endif
+
+      comment
+        Collect all active links from linklist
+      endcomment
+      if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0
+        for link in linklists[section.settings.menu].links
+          if link.active or link.child_active
+            echo '||' | append: link.title | append: '::' | append: link.url
+          endif
+          if link.child_active
+            for sublink in link.links
+              if sublink.active or sublink.child_active
+                echo '||' | append: sublink.title | append: '::' | append: sublink.url
+              endif
+              if sublink.child_active
+                for subsublink in sublink.links
+                  if subsublink.active
+                    echo '||' | append: subsublink.title | append: '::' | append: subsublink.url
+                  endif
+                endfor
+              endif
+            endfor
+          endif
+        endfor
+      endif
+
+      if template.name == "list-collections"
+        echo '||'
+        echo 'templates.collections.title' | t
+        echo '::' | append: routes.collections_url
+      elsif template.name == "collection"
+        echo '||' | append: collection.title
+        echo '::' | append: collection.url
+      elsif template.name == "product"
+        if collection.title != blank
+          echo '||' | append: collection.title
+          echo '::' | append: collection.url
+        endif
+        echo '||' | append: product.title
+        echo '::' | append: product.url
+      elsif template.name == "blog"
+        echo '||' | append: blog.title
+        echo '::' | append: blog.url
+      elsif template.name == "article"
+        if blog.title != blank
+          echo '||' | append: blog.title
+          echo '::' | append: blog.url
+        endif
+      elsif template.name == "page"
+        echo '||' | append: page.title
+        echo '::' | append: page.url
+      elsif template.name == "cart"
+        echo '||'
+        echo 'templates.cart.title' | t
+        echo '::' | append: routes.cart_url
+      elsif template.name == "404"
+        echo '||'
+        echo 'templates.404.title' | t
+      elsif template.name == "search"
+        echo '||'
+        echo 'templates.search.title' | t
+        echo '::' | append: routes.search_url
+      elsif template.name == "login"
+        echo '||'
+        echo 'customer.login_page.title' | t
+        echo '::' | append: routes.account_login_url
+      elsif template.name == "reset_password"
+        echo '||'
+        echo 'customer.reset_password.title' | t
+        echo '::' | append: routes.account_login_url
+      elsif template.name == "register"
+        echo '||'
+        echo 'customer.register.title' | t
+        echo '::' | append: routes.account_register_url
+      elsif template.name == "activate_account"
+        echo '||'
+        echo 'customer.account.title' | t
+        echo '::' | append: routes.account_url
+      elsif template.name == "account"
+        echo '||'
+        echo 'customer.account.title' | t
+        echo '::' | append: routes.account_url
+      elsif template.name == "addresses"
+        echo '||'
+        echo 'customer.account.title' | t
+        echo '::' | append: routes.account_url
+        echo '||'
+        echo 'customer.account.view_addresses' | t
+        echo '::' | append: routes.account_addresses_url
+      elsif template.name == "order"
+        echo '||'
+        echo 'customer.account.title' | t
+        echo '::' | append: routes.account_url
+        echo '||'
+        echo 'customer.orders.title' | t
+        echo '::' | append: routes.account_url
+      endif
+    endcapture
+
+    assign breadcrumb_arr = breadcrumb_str | strip_newlines | remove_first: '||' | split: '||' | uniq
+  -%}
+
+  {%- comment -%}
+    RENDER BREADCRUMB
+  {%- endcomment -%}
+  {%- comment -%} Render breadcrumbs {%- endcomment -%}
+  {% if breadcrumb_arr != blank %}
+
+    {%- comment -%} Import styles for this section {%- endcomment -%}
+    {%- render 'import-styles', file_name: 'component-breadcrumbs.css', force: true -%}
+
+    <div class="page-width {{ section.settings.alignment }} {{ hide_on_mobile_class }}">
+      <ol class="breadcrumbs breadcrumbs-desk list-unstyled">
+
+        {%- comment -%} Loop the array {%- endcomment -%}
+        {%- for path in breadcrumb_arr -%}
+          {%- liquid
+            assign path_arr = path | split: '::'
+            assign path_text = path_arr[0]
+            assign path_url = path_arr[1]
+            capture path_name_item
+              echo '<span>'
+              echo path_text
+              unless forloop.last
+                echo divider
+              endunless
+              echo '</span>'
+            endcapture
+          -%}
+
+          {%- liquid
+            if forloop.last
+
+              echo '<li class="breadcrumbs__item">'
+
+                echo path_name_item
+
+                if section.settings.show_tagged_link and current_tags.size > 0
+                  capture current_tags_list
+                    for tag in current_tags
+                      echo tag
+                      unless forloop.last
+                        echo ','
+                      endunless
+                    endfor
+                  endcapture
+
+                  echo 'general.meta.tags' | t: tags: current_tags_list
+                  echo '<meta content="{{ forloop.index }}" />'
+
+                endif
+
+              echo '</li>'
+
+            elsif template contains 'product'
+              assign pro_collection = product.collections.first
+              assign startpage = shop.url
+              echo '<li class="breadcrumbs__link">'
+              echo '<span>'
+              echo '<a class="breadcrumbs__link" href="'
+              echo startpage
+              echo '">'
+              echo 'Startseite'
+              echo '</span>'
+              echo divider
+              echo '</li>'
+              if pro_collection
+                echo '<li class="breadcrumbs__link">'
+                echo '<span>'
+                echo pro_collection.title | link_to: pro_collection.url
+                echo '</span>'
+                echo divider
+                echo '</li>'
+              endif  
+
+            else
+
+              if path_url != blank and path_url != "#"
+                echo '<li class="breadcrumbs__item">'
+                echo '<a class="breadcrumbs__link" href="'
+                echo path_url | strip
+                echo '">'
+                echo path_name_item
+                echo '</a>'
+                echo '<meta content="{{ forloop.index }}" />'
+                echo '</li>'
+              else
+                if section.settings.show_non_link
+                  echo '<li class="breadcrumbs__item">'
+                  echo path_name_item
+                  echo '<meta content="{{ forloop.index }}" />'
+                  echo '</li>'
+                endif
+              endif
+            endif
+          -%}
+        {%- endfor -%}
+      </ol>
+
+      <span class="breadcrumbs breadcrumbs-mob">
+        {%- render 'global-icon',
+          icon: 'chevron-left'
+        -%}
+        {% if template contains 'product' %}
+          <span>
+              <button onclick="history.back()">{{ product.collections.first.title }} </button>
+          </span>
+        {% else %}
+          <span>
+            <button onclick="history.back()">Geh zurück</button>
+          </span>  
+        {% endif %}  
+      </span>
+
+    </div>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Breadcrumbs",
+  "class": "breadcrumbs-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "info": "The breadcrumb path will be based on this menu",
+      "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_home_link",
+      "default": true,
+      "label": "Show 'Home'"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tagged_link",
+      "default": true,
+      "label": "Show 'Tagged:'"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_non_link",
+      "default": true,
+      "label": "Show items without a url"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "default": false,
+      "label": "Hide on mobile"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breadcrumbs"
+    }
+  ]
+}
+{% endschema %}

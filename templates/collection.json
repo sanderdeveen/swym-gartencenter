@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "16636997769ffcaf8a": {
+      "type": "breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "show_home_link": true,
+        "show_tagged_link": true,
+        "show_non_link": true,
+        "hide_on_mobile": false,
+        "alignment": "left"
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "top_sellers": "Produkte bestseller",
+        "featured_product_one": "",
+        "featured_product_two": "",
+        "featured_product_three": "",
+        "color_scheme": "background-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "collection_columns_desktop": 6,
+        "show_usp": true,
+        "usp_1": "Kein dreckiges Auto",
+        "usp_2": "Hilfe vor und nach dem Kauf",
+        "usp_3": "Lieferung deutschlandweit",
+        "show_sale_banner": false,
+        "sale_banner_location": 6,
+        "bg_color": "brand-1",
+        "url_banner": "",
+        "banner_text": "",
+        "color": "black",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "enable_filtering": true,
+        "filter_type": "drawer",
+        "enable_sorting": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "16636997769ffcaf8a",
+    "banner",
+    "product-grid"
+  ]
+}

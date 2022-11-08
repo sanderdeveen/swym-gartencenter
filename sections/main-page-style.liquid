@@ -1,0 +1,601 @@
+<div class="page-width page-width--narrow">
+  <p>This page is here to show off styles for standard page elements such as typography, form elements, and icons. These are hard coded in an alternate page template file containing the section <code>main-page-styles.liquid</code>.</p>
+
+  <hr>
+
+  <h2>Colors</h2>
+  <style>
+    .color_circles .circle { display: flex; width: 5rem; height: 5rem; border-radius: 50%; margin: .25rem; justify-content: center; align-items: center; padding: 0.25rem; }
+    .color_circles p { font-size: 0.75rem; }
+  </style>
+
+  <div class="color_circles">
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-background);" title="Brand background">
+        <p style="color: var(--color-brand-text);">Brand text</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-text-50);" title="Brand text 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-text-25);" title="Brand text 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-text-15);" title="Brand text 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-text-5);" title="Brand text 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-primary);" title="Primary">
+        <p style="color: var(--color-brand-text-on-primary);">Primary</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-primary-dark);" title="Primary dark"></div>
+      <div class="circle" style="background-color: var(--color-brand-primary-50);" title="Primary 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-primary-25);" title="Primary 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-primary-15);" title="Primary 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-primary-5);" title="Primary 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-secondary);" title="Secondary">
+        <p style="color: var(--color-brand-text-on-secondary);">Secondary</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-secondary-dark);" title="Secondary dark"></div>
+      <div class="circle" style="background-color: var(--color-brand-secondary-50);" title="Secondary 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-secondary-25);" title="Secondary 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-secondary-15);" title="Secondary 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-secondary-5);" title="Secondary 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-tertiary);" title="Tertiary">
+        <p style="color: var(--color-brand-text-on-tertiary);">Tertiary</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-tertiary-dark);" title="tertiary dark"></div>
+      <div class="circle" style="background-color: var(--color-brand-tertiary-50);" title="tertiary 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-tertiary-25);" title="tertiary 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-tertiary-15);" title="tertiary 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-tertiary-5);" title="tertiary 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-quarernary);" title="Quarernary">
+        <p style="color: var(--color-brand-text-on-quarernary);">Quarernary</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-quarernary-dark);" title="quarernary dark"></div>
+      <div class="circle" style="background-color: var(--color-brand-quarernary-50);" title="quarernary 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-quarernary-25);" title="quarernary 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-quarernary-15);" title="quarernary 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-quarernary-5);" title="quarernary 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-quinary);" title="Quinary">
+        <p style="color: var(--color-brand-text-on-quinary);">Quinary</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-quinary-dark);" title="quinary dark"></div>
+      <div class="circle" style="background-color: var(--color-brand-quinary-50);" title="quinary 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-quinary-25);" title="quinary 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-quinary-15);" title="quinary 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-quinary-5);" title="quinary 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-funnel);" title="Funnel">
+        <p style="color: var(--color-brand-text-on-funnel);">Funnel</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-funnel-dark);" title="Funnel dark"></div>
+      <div class="circle" style="background-color: var(--color-brand-funnel-50);" title="Funnel 50"></div>
+      <div class="circle" style="background-color: var(--color-brand-funnel-25);" title="Funnel 25"></div>
+      <div class="circle" style="background-color: var(--color-brand-funnel-15);" title="Funnel 15"></div>
+      <div class="circle" style="background-color: var(--color-brand-funnel-5);" title="Funnel 5"></div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-black);" title="Black">
+        <p style="color: var(--color-white);">Black</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-black-50);" title="Black 50"></div>
+      <div class="circle" style="background-color: var(--color-black-25);" title="Black 25"></div>
+      <div class="circle" style="background-color: var(--color-black-15);" title="Black 15"></div>
+      <div class="circle" style="background-color: var(--color-black-5);" title="Black 5"></div>
+      <div class="circle" style="background-color: var(--color-white);" title="White">
+        <p style="color: var(--color-brand-text);">White</p>
+      </div>
+    </div>
+
+    <div class="is-flex center">
+      <div class="circle" style="background-color: var(--color-brand-accent);" title="Accent">
+        <p style="color: var(--color-brand-text-on-accent);">Accent</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-positive);" title="Brand Positive">
+        <p style="color: var(--color-white);">Positive</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-brand-negative);" title="Brand Negative">
+        <p style="color: var(--color-white);">Negative</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-border);" title="Border">
+        <p style="color: var(--color-brand-text);">Border</p>
+      </div>
+      <div class="circle" style="background-color: var(--color-border-50);" title="Border 50">
+        <p style="color: var(--color-brand-text);">Border 50</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <h2>Typography</h2>
+
+  <h1>Headline 1</h1>
+  <h2>Headline 2</h2>
+  <h3>Headline 3</h3>
+  <h4>Headline 4</h4>
+  <h5>Headline 5</h5>
+  <h6>Headline 6</h6>
+
+  <h2>Paragraphs</h2>
+
+  <p class="label-large">Body 1 - Bigger normal text.</p>
+  <p class="weight-medium">Body 2 - Normal test for the page itself.</p>
+  <p class="label-small">Body 3 - Smaller text for the page itself.</p>
+  <p> </p>
+  <p class="label-extra-large weight-medium">Label 1</p>
+  <p class="label-medium weight-medium">Label 2</p>
+  <p class="label-small weight-medium">Label 3</p>
+  <p> </p>
+  <p class="text-capitalize">Capitalised</p>
+
+
+  <h2>Type styles</h2>
+  <ul>
+    <li><strong>Strong</strong></li>
+    <li><em>Emphasis</em></li>
+    <li><a href="#">Inline link</a></li>
+    <li><span style="text-decoration: line-through;">Strike</span></li>
+    <li><sup>Sup</sup></li>
+  </ul>
+
+  <h2>Blockquotes</h2>
+  <blockquote>
+    <p>Eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+    <cite>The author of the quote</cite>
+  </blockquote>
+
+  <h2>Lists</h2>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <h6><code>ul</code> (default)</h6>
+        </td>
+        <td>
+          <ul>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+            <li>Four</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h6>Numeric bullet <code>ol</code> (default)</h6>
+        </td>
+        <td>
+          <ol>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+            <li>Four</li>
+          </ol>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h6>Child lists (to match the RTE styles)</h6>
+        </td>
+        <td>
+          <ul>
+            <li>One</li>
+            <li>Two</li>
+            <li>Three, with child list
+              <ul>
+                <li>First sub item</li>
+                <li>Second sub item</li>
+                <li>Third sub item, with child list
+                  <ul>
+                    <li>Third level item</li>
+                    <li>Another third level item</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Four</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Rich text styles</h2>
+
+  <div class="rte">
+    <h2>Headline 2</h2>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+
+    <h3>Headline 3</h3>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+
+    <h4>Headline 4</h4>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+
+    <h5>Headline 5</h5>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+
+    <h6>Headline 6</h6>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolore beatae molestias voluptas cumque facilis, recusandae omnis, nihil magni culpa tenetur quo aperiam, earum nisi at pariatur impedit voluptates quia!</p>
+
+    <blockquote>
+      <p>Eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+      <cite>The author of the quote</cite>
+    </blockquote>
+
+    <ul>
+      <li>One</li>
+      <li>Two</li>
+      <li>Three, with child list
+        <ul>
+          <li>First sub item</li>
+          <li>Second sub item</li>
+          <li>Third sub item, with child list
+            <ul>
+              <li>Third level item</li>
+              <li>Another third level item</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Four</li>
+    </ul>
+
+
+  </div>
+
+  <hr>
+
+  <h2>Default tables</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Payment Status</th>
+        <th>Fulfillment Status</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>#1001</td>
+        <td>December 22, 2015</td>
+        <td>Authorized</td>
+        <td>Unfulfilled</td>
+        <td>$43.03</td>
+      </tr>
+      <tr>
+        <td>#1002</td>
+        <td>December 23, 2015</td>
+        <td>Authorized</td>
+        <td>Unfulfilled</td>
+        <td>$44.03</td>
+      </tr>
+      <tr>
+        <td>#1003</td>
+        <td>December 24, 2015</td>
+        <td>Authorized</td>
+        <td>Unfulfilled</td>
+        <td>$45.03</td>
+      </tr>
+      <tr>
+        <td>#1004</td>
+        <td>December 25, 2015</td>
+        <td>Authorized</td>
+        <td>Unfulfilled</td>
+        <td>$46.03</td>
+      </tr>
+      <tr>
+        <td>#1005</td>
+        <td>December 26, 2015</td>
+        <td>Authorized</td>
+        <td>Unfulfilled</td>
+        <td>$47.03</td>
+      </tr>
+      <tr>
+        <td>#1006</td>
+        <td>December 27, 2015</td>
+        <td>Authorized</td>
+        <td>Unfulfilled</td>
+        <td>$48.03</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Columns</h2>
+
+  <div class="is-grid has-col-1">
+
+    <p>
+      More info on <a href="https://github.com/daveberning/griddle">griddle</a>,
+      <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">css-tricks</a>
+      and <a href="https://learncssgrid.com/">learn-css-grid</a>
+    </p>
+
+    <div class="is-grid">
+      <div class="is-col-6 placeholder">&nbsp;</div>
+      <div class="is-col-6 placeholder">&nbsp;</div>
+    </div>
+
+    <div class="is-grid">
+      <div class="is-col-4 placeholder">&nbsp;</div>
+      <div class="is-col-4 placeholder">&nbsp;</div>
+      <div class="is-col-4 placeholder">&nbsp;</div>
+    </div>
+
+    <div class="is-grid">
+      <div class="is-col-6 is-col-3-md  placeholder">&nbsp;</div>
+      <div class="is-col-6 is-col-3-md  placeholder">&nbsp;</div>
+      <div class="is-col-6 is-col-3-md  placeholder">&nbsp;</div>
+      <div class="is-col-6 is-col-3-md  placeholder">&nbsp;</div>
+    </div>
+
+    <strong>Custom Column Lengths</strong>
+
+    <div class="is-grid has-col-4">
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+    </div>
+
+    <strong>Col gaps</strong>
+
+    <div class="is-grid has-col-4 has-no-col-gap">
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+    </div>
+
+    <div class="is-grid has-col-4">
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+    </div>
+
+    <div class="is-grid has-col-4">
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+    </div>
+
+    <div class="is-grid has-col-4">
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+      <div class="placeholder">&nbsp;</div>
+    </div>
+
+  </div>
+
+
+
+  <hr>
+
+  <h2>Forms</h2>
+    
+  <form class="form-fields">
+    <div class="field">
+      <label class="field__label label-medium" for="example-1">
+        Label
+      </label>
+      <input type="text" class="field__input" id="example-1">
+      <div class="field__message">
+        Form message
+      </div>
+    </div>
+    <div class="field">
+      <label class="field__label label-medium" for="example-2">
+        Email
+      </label>
+      <input type="text" class="field__input" type="email" id="example-2">
+      <div class="field__message field__message--error">
+        Error message
+      </div>
+    </div>
+    <div class="field">
+      <label class="field__label label-medium" for="example-3">
+        Label text for select
+      </label>
+      <div class="select">
+        <select class="field__select" id="example-3">
+          <option value="">Default</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        {%- render 'global-icon', icon: 'caret', icon_size: 'xs' -%}
+      </div>
+    </div>
+  </form>
+
+  <hr>
+
+  <h2>Buttons</h2>
+
+  <p>
+    <a href="#" class="button button--primary">Primary anchor</a>
+    <input type="button" class="button button--primary" value="Primary input" />
+    <button type="button" class="button button--primary">Primary button</button>
+    <button type="button" disabled="disabled" class="button button--primary">Primary button disabled</button>
+  </p>
+  <p>
+    <a href="#" class="button button--icon icon-left">{% render 'global-icon', icon: 'pen', icon_size: "sm" %} Icon anchor</a>
+    <input type="button" class="button button--icon" value="Icon input"/>
+    <button type="button" class="button button--icon icon-left">{% render 'global-icon', icon: 'pen', icon_size: "sm" %} Icon button</button>
+    <button type="button" disabled="disabled" class="button button--icon icon-left">{% render 'global-icon', icon: 'pen', icon_size: "sm" %} Icon button disabled</button>
+  </p>
+  <p>
+    <a href="#" class="button button--icon icon-right">Icon anchor {% render 'global-icon', icon: 'pen', icon_size: "sm" %}</a>
+    <input type="button" class="button button--icon icon-right" value="Icon input"/>
+    <button type="button" class="button button--icon icon-right">Icon button {% render 'global-icon', icon: 'pen', icon_size: "sm" %}</button>
+    <button type="button" disabled="disabled" class="button button--icon icon-right">Icon button disabled {% render 'global-icon', icon: 'pen', icon_size: "sm" %}</button>
+  </p>
+  <p>
+    <a href="#" class="button button--outline">Outline anchor</a>
+    <input type="button" class="button button--outline" value="Outline input" />
+    <button type="button" class="button button--outline">Outline button</button>
+    <button type="button" disabled="disabled" class="button button--outline">Outline button disabled</button>
+  </p>
+  <p>
+    <a href="#" class="button button--outline icon-left">{% render 'global-icon', icon: 'pen', icon_size: "sm" %} Outline icon anchor</a>
+    <input type="button" class="button button--outline icon-left" value="Outline input" />
+    <button type="button" class="button button--outline icon-left">{% render 'global-icon', icon: 'pen', icon_size: "sm" %} Outline icon button</button>
+    <button type="button" disabled="disabled" class="button button--outline icon-left">{% render 'global-icon', icon: 'pen', icon_size: "sm" %} Outline icon button disabled</button>
+  </p>
+  <p>
+    <a href="#" class="button button--link">Call to action</a><br>
+    <input type="button" class="button button--link" value="Call to action" /><br>
+    <button type="button" class="button button--link">Call to action</button><br>
+    <button type="button" disabled="disabled" class="button button--link">Call to action</button>
+  </p>
+  
+
+  <hr>
+
+  <h2>Collapsibles</h2>
+  <collapsible-element class="collapsible collapsible--rte" data-options='{
+    "closeSiblings": true
+  }'>
+    <div data-collapsible-group>
+      <button type="button label-extra-large" class="button button--tertiary button--full-width" data-collapsible-trigger>
+        Collapsible button 1
+        {%- render 'global-icon', icon: 'collapsible', icon_size: "xxs" icon_class: "collapsible-trigger-icon" -%}
+      </button>
+      <div class="rte" data-collapsible-target>
+        Collapsible content 1
+      </div>
+    </div>
+    <div data-collapsible-group>
+      <button type="button label-extra-large" class="button button--tertiary button--full-width" data-collapsible-trigger>
+        Collapsible button 2
+        {%- render 'global-icon', icon: 'collapsible', icon_size: "xxs" icon_class: "collapsible-trigger-icon" -%}
+      </button>
+      <div class="rte" data-collapsible-target>
+        Collapsible content 2
+      </div>
+    </div>
+    <div data-collapsible-group>
+      <button type="button label-extra-large" class="button button--tertiary button--full-width" data-collapsible-trigger>
+        Collapsible button 3
+        {%- render 'global-icon', icon: 'collapsible', icon_size: "xxs" icon_class: "collapsible-trigger-icon" -%}
+      </button>
+      <div class="rte" data-collapsible-target>
+        Collapsible content 3
+      </div>
+    </div>
+  </collapsible-element>
+
+  <hr>
+
+  <h2>SVG icons</h2>
+  <ul class="list-unstyled is-grid">
+    <li>{% render 'icon-3d-model' %}</li>
+    <li>{% render 'icon-accordion' %}</li>
+    <li>{% render 'icon-account' %}</li>
+    <li>{% render 'icon-arrow' %}</li>
+    <li>{% render 'icon-caret' %}</li>
+    <li>{% render 'icon-cart-empty' %}</li>
+    <li>{% render 'icon-cart' %}</li>
+    <li>{% render 'icon-checkmark' %}</li>
+    <li>{% render 'icon-clipboard' %}</li>
+    <li>{% render 'icon-close-small' %}</li>
+    <li>{% render 'icon-close' %}</li>
+    <li>{% render 'icon-discount' %}</li>
+    <li>{% render 'icon-error' %}</li>
+    <li>{% render 'icon-facebook' %}</li>
+    <li>{% render 'icon-filter' %}</li>
+    <li>{% render 'icon-hamburger' %}</li>
+    <li>{% render 'icon-instagram' %}</li>
+    <li>{% render 'icon-minus' %}</li>
+    <li>{% render 'icon-padlock' %}</li>
+    <li>{% render 'icon-pause' %}</li>
+    <li>{% render 'icon-pinterest' %}</li>
+    <li>{% render 'icon-play' %}</li>
+    <li>{% render 'icon-plus' %}</li>
+    <li>{% render 'icon-remove' %}</li>
+    <li>{% render 'icon-share' %}</li>
+    <li>{% render 'icon-snapchat' %}</li>
+    <li>{% render 'icon-succes' %}</li>
+    <li>{% render 'icon-tick' %}</li>
+    <li>{% render 'icon-tiktok' %}</li>
+    <li>{% render 'icon-tumblr' %}</li>
+    <li>{% render 'icon-twitter' %}</li>
+    <li>{% render 'icon-unavailable' %}</li>
+    <li>{% render 'icon-vimeo' %}</li>
+    <li>{% render 'icon-youtube' %}</li>
+    <li>{% render 'icon-zoom' %}</li>
+  </ul>
+  <p><strong>Payment icons</strong></p>
+  <ul class="list-unstyled is-grid">
+
+  </ul>
+  <p><strong>Social icons</strong></p>
+  <ul class="list-unstyled is-grid">
+
+  </ul>
+
+
+</div>
+
+
+
+
+{% schema %}
+{
+  "name": "Styleguide",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+
+  ],
+  "blocks": [
+    {
+      "type": "styleguide",
+      "name": "t:sections.rich-text.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Styleguide",
+      "blocks": [
+        {
+          "type": "styleguide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

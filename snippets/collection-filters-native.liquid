@@ -1,0 +1,331 @@
+<collection-filters-form>
+
+  <form id="CollectionFiltersForm" class="filter-options">
+
+    {%- comment -%} Shadow overlay {%- endcomment -%}
+    <toggle-element-class
+      data-options='{ "toggleClass": "collection-filter-is-open", "target": "body" }'
+      class="filter-options__backdrop"
+      >
+    </toggle-element-class>
+
+    <div class="filter-options__inner">
+
+
+      {%- comment -%} Header {%- endcomment -%}
+      <div class="filter-options__header">
+        <toggle-element-class data-options='{
+            "toggleClass": "collection-filter-is-open",
+            "target": "body"
+            }'>
+          <button
+            type="button"
+            tabindex="0"
+            class="button button--link filter-options__close"
+            >
+            {%- render 'global-icon', icon: 'close', icon_size: 'sm' -%}
+          </button>
+        </toggle-element-class>
+        <div class="filter-options__header-inner is-flex is-justified-space-between is-aligned-center">
+          <h2 class="filter-options__heading label-large text-bold">
+            Filter and sort 
+          </h2>
+          {%- comment -%} Clear all link {%- endcomment -%}
+          <filter-remove>
+            <a href="{{ collection.url }}?sort_by={{ sort_by }}" class="button button--sm button--link js-filter-remove filter-options__clear-all">
+              Clear all
+            </a>
+          </filter-remove>
+        </div>
+      </div>
+
+      {%- comment -%} Render the filters {%- endcomment -%}
+      {%- if section.settings.filter_type == "native" -%}
+
+        {%- comment -%} Active filters {%- endcomment -%}
+        <div class="active-filter-options active-filter-options--empty filter-options__details collapsible-is-open"{% if settings.enable_filter_collapsibles %} data-collapsible-group{% endif %}>
+          {%- if settings.enable_filter_collapsibles -%}
+            <button type="button" class="active-filter-options__header filter-options__summary" data-collapsible-trigger>
+              <span class="is-flex is-justified-space-between is-aligned-center">
+                <span class="weight-bold">
+                  {%- render 'format-translation'
+                    namespace: "products.sections.collection_template",
+                    key: "current_filters",
+                    fallback: "Current filters"
+                  -%}
+                </span>
+                <span class="filter-options__arrow">
+                  {%- render 'global-icon', icon: 'minus', icon_size: 'xs' -%}
+                  {%- render 'global-icon', icon: 'plus', icon_size: 'xs' -%}
+                </span>
+              </span>
+            </button>
+          {%- else -%}
+            <div class="active-filter-options__header filter-options__summary">
+              <span class="weight-bold">
+                {%- render 'format-translation'
+                  namespace: "products.sections.collection_template",
+                  key: "current_filters",
+                  fallback: "Current filters"
+                -%}
+              </span>
+            </div>
+          {%- endif -%}
+
+          <div class="active-filter-options__inner filter-options__submenu"{% if settings.enable_filter_collapsibles %} data-collapsible-target{% endif %}>
+            {%- for filter in collection.filters -%}
+              {%- for value in filter.active_values -%}
+                <filter-remove>
+                  <a href="{{ value.url_to_remove }}" class="active-filter-options__button js-filter-remove is-flex is-aligned-center">
+                    {%- render 'global-icon', icon: 'close' -%}
+                    {{ filter.label }}: {{ value.label | escape }}
+                  </a>
+                </filter-remove>
+              {%- endfor -%}
+
+              {% if filter.type == "price_range" %}
+                {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+                  <filter-remove>
+                    <a class="active-filter-options__button js-filter-remove" href="{{ filter.url_to_remove }}">
+                      {%- render 'global-icon', icon: 'close', icon_size: 'sm' -%}
+                      {{ filter.label }}:
+                      {%- liquid
+                        if filter.min_value.value
+                          echo filter.min_value.value | money
+                        else
+                          echo 0 | money
+                        endif
+                        echo ' - '
+                        if filter.max_value.value
+                          echo filter.max_value.value | money
+                        else
+                          echo filter.range_max | money
+                        endif
+                      -%}
+                    </a>
+                  </filter-remove>
+                {%- endif -%}
+              {% endif %}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        {%- comment -%} Filter options {%- endcomment -%}
+        <div class="filter-options__main">
+
+          {%- comment -%} Find filter options {%- endcomment -%}
+          {%- for filter in collection.filters -%}
+
+            {%- comment -%} Check if this is a color filter {%- endcomment -%}
+            {%- liquid
+              assign is_color = false
+              assign color_variant_label = settings.color_filter_name | handleize
+              assign filter_label = filter.label | handleize
+
+              if color_variant_label == filter_label
+                assign is_color = true
+              endif
+            -%}
+
+            {% case filter.type %}
+              {% when 'list' %}
+                {%- capture list_content -%}
+                  <ul class="filter-options__list filter-options__list--{{ filter_label }} options options--{{ filter_label }} list-unstyled is-flex is-aligned-center">
+                    {%- for value in filter.values -%}
+                      {%- assign index = forloop.index -%}
+
+                      {%- comment -%} Only render if there are items {%- endcomment -%}
+                      {%- if value.count > 0 -%}
+
+                        {%- capture label -%}
+                          <label for="Filter-{{ filter.label | handleize | escape }}-{{ index }}" class="options__label options__label--{{ filter_label }}{% if value.count == 0 and value.active == false %} filter-options__label--disabled{% endif %}">
+                            {{ value.label | escape }}
+                          </label>
+                        {%- endcapture -%}
+
+                        <li class="options__option options__option--{{ filter_label }} list-menu__item">
+                          <input class="options__input options__input--{{ filter_label }} visually-hidden"
+                            type="checkbox"
+                            name="{{ value.param_name }}"
+                            value="{{ value.value }}"
+                            id="Filter-{{ filter.label | handleize | escape }}-{{ index }}"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          >
+
+                          {%- comment -%} If this is a color filter, add the color as a background color. {%- endcomment -%}
+                          {%- if is_color -%}
+                            {%- liquid
+                              assign variant_color = value.label | handleize
+                              assign color_mappings = settings.color_mappings | split: ','
+                              assign color_is_mapped = false
+                            -%}
+
+                            {%- comment -%} Loop through color mapping {%- endcomment -%}
+                            {%- for color in color_mappings -%}
+                              {%- liquid
+                                assign variant_color = value.label | handleize
+                                assign color_name = color | split: '|' | first | handleize
+                                assign color_hex = color | split: '|' | last
+                              -%}
+                              {%- if color_name == variant_color -%}
+
+                                {%- comment -%} Render with background-color {%- endcomment -%}
+                                {%- assign color_is_mapped = true -%}
+                                <label for="Filter-{{ filter.label | handleize | escape }}-{{ index }}" class="options__label options__label--{{ filter_label }} {% if value.count == 0 and value.active == false %} options__label--disabled{% endif %}" style="background-color: {{ color_hex }};">
+                                  <span class="visually-hidden">{{ value.label | escape }}</span>
+                                </label>
+                              {%- endif -%}
+                            {%- endfor -%}
+
+                            {%- comment -%} If color is not found in the mapping, render it with a text label {%- endcomment -%}
+                            {%- unless color_is_mapped -%}
+                              {{ label }}
+                            {%- endunless -%}
+
+                          {%- comment -%} Else render default filter option {%- endcomment -%}
+                          {%- else -%}
+                            {{ label }}
+                          {%- endif -%}
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                {%- endcapture -%}
+
+                {%- if settings.enable_filter_collapsibles -%}
+                  {%- render 'filter-option',
+                    summary_content: list_content,
+                    label: filter.label,
+                    index: forloop.index,
+                    is_color: is_color
+                  -%}
+                {%- else -%}
+                  <div class="filter-options__details filter-options__details--opened js-filter" data-index="{{ forloop.index }}">
+                    <span class="label-medium">
+                      {{- filter.label | escape -}}
+                    </span>
+                    {{- list_content -}}
+                  </div>
+                {%- endif -%}
+
+            {%- comment -%} Price range {%- endcomment -%}
+            {% when 'price_range' %}
+              {% liquid
+                assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                assign uses_comma_decimals = false
+                if currencies_using_comma_decimals contains cart.currency.iso_code
+                  assign uses_comma_decimals = true
+                endif
+              %}
+              {%- capture price_range -%}
+                {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+                <p class="filter-options__info">
+                  {%- render 'format-translation'
+                    namespace: "sections.collection_template",
+                    key: "max_price",
+                    price: max_price_amount,
+                    fallback: "The highest price"
+                  -%}
+                </p>
+                <price-range class="filter-options__price">
+                  <div class="field is-flex is-aligned-center">
+                    <span class="field__currency">{{ cart.currency.symbol }}</span>
+                    <input class="field__input"
+                      name="{{ filter.min_value.param_name }}"
+                      id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                      {% if filter.min_value.value %}
+                        {%- if uses_comma_decimals -%}
+                          value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                        {%- else -%}
+                          value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                        {% endif %}
+                      {% endif %}
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      max="{{ filter.range_max | divided_by: 100 | ceil }}" />
+                    <label class="field__label" for="Search-In-Modal">
+                      {%- render 'format-translation' namespace: "sections.collection_template.from", fallback: "From" -%}
+                    </label>
+                  </div>
+                  <div class="field is-flex is-aligned-center">
+                    <span class="field__currency">{{ cart.currency.symbol }}</span>
+                    <input class="field__input"
+                      name="{{ filter.max_value.param_name }}"
+                      id="Filter-{{ filter.label | escape }}-{{ forloop.index }}"
+                      {% if filter.max_value.value %}
+                        {%- if uses_comma_decimals -%}
+                          value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+                        {%- else -%}
+                          value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                        {% endif %}
+                      {% endif %}
+                      type="number"
+                      placeholder="{{ filter.range_max | divided_by: 100 | ceil }}"
+                      min="0"
+                      max="{{ filter.range_max | divided_by: 100 | ceil }}" />
+                    <label class="field__label" for="Search-In-Modal">
+                      {%- render 'format-translation' namespace: "sections.collection_template.to", fallback: "To" -%}
+                    </label>
+                  </div>
+                </price-range>
+              {%- endcapture -%}
+
+              {%- if settings.enable_filter_collapsibles -%}
+                {%- render 'filter-option',
+                  summary_content: price_range,
+                  label: filter.label,
+                  index: forloop.index
+                -%}
+              {%- else -%}
+                <div class="filter-options__details filter-options__details--opened js-filter" data-index="{{ forloop.index }}">
+                  <span class="label-medium">{{ filter.label | escape }}</span>
+                  {{ price_range }}
+                </div>
+              {%- endif -%}
+
+            {% endcase %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.enable_sorting -%}
+        <div class="filter-options__sort sort-options">
+          <p class="sort-options__header label-large">
+            Sort by
+          </p>
+          <div class="" aria-describedby="a11y-refresh-page-message">
+            {%- for option in collection.sort_options -%}
+              <div class="sort-options__option">
+                <input type="radio" class="visually-hidden" id="option-{{ forloop.index }}" name="sort_by" value="{{ option.value | escape }}" {% if option.value == sort_by %} checked{% endif %}/>
+                <label for="option-{{ forloop.index }}">
+                  {{- option.name | escape -}}
+                </label>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Submit buttons {%- endcomment -%}
+      <noscript>
+        <div class="filter-options__footer">
+          <button class="button button--primary">
+            {%- render 'format-translation'
+              namespace: "sections.collection_template",
+              key: "apply",
+              fallback: "Apply"
+            -%}
+          </button>
+        </div>
+      </noscript>
+
+      {% if collection.current_vendor or collection.current_type %}
+        <input type="hidden" name="q" value="{{ collection.current_vendor }}{{ collection.current_type }}">
+      {% endif %}
+    </div>
+  </form>
+</collection-filters-form>
+
+<script src="{{ 'collection-filters-form.js' | asset_url }}" defer></script>
